@@ -44,28 +44,11 @@ if ingredients_list:
        
        st.subheader(fruit_chosen + ' Nutrition Information')
        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + search_on)
-       fv_df = st.dataframe(data=fruityvice_response.json(),use_container_width=True)
+       fv_df = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
  
   # st.write(ingredients_string)
     
-  my_insert_stmt = """ insert into smoothies.public.orders(ingredients)
-            values ('""" + ingredients_string + ""","""+name_on_order+ """')"""
-  #st.write(my_insert_stm)
-  # st.stop()
-
-  #st.write(my_insert_stmt)
-  time_to_insert = st.button('Submit Order')
-    
-  if time_to_insert:
-     session.sql(my_insert_stmt).collect()
-      
-     st.success('Your Smoothie is ordered!', icon="✅")
-
-import requests
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
-
-
+ 
 
       
 
