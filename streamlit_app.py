@@ -33,29 +33,35 @@ if ingredients_list:
     ingredients_string = ''
 
     for fruit_chosen in ingredients_list:
-        ingredients_string += fruit_chosen + ' '
+    ingredients_string += fruit_chosen + ' '
 
-        # Get SEARCH_ON value for the selected fruit
-        search_on = pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
-        
-        # Show subheader for nutrition info
-        st.subheader(f"{fruit_chosen} Nutrition Information")
-        api_url = f"https://smoothiefroot.com/api/fruit/{search_on.lower()}"
-        st.write("Generated URL:", api_url)
+    # Snowflake dataframe मधून SEARCH_ON value
+    search_on = pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
 
+    # URL तयार करा (lowercase)
+    api_url = f"https://smoothiefroot.com/api/fruit/{search_on.lower()}"
+    st.write("Final API URL:", api_url)  # Debugging output
 
-        try:
-            smoothiefroot_response = requests.get(api_url, headers=headers, timeout=7)
-            smoothiefroot_response.raise_for_status()  # Error throw करेल जर status 200 नसेल
+    headers = {
+        "Accept": "application/json",
+        "User-Agent": "StreamlitApp/1.0"
+    }
 
-            st.write("API Raw Response:", smoothiefroot_response.text)
+    try:
+        smoothiefroot_response = requests.get(api_url, headers=headers, timeout=7)
+        smoothiefroot_response.raise_for_status()  # जर status code 200 नसेल तर error throw करेल
 
-            data = smoothiefroot_response.json()
-            fv_df = pd.DataFrame(data)
-            st.dataframe(fv_df)
+        # Raw API response दाखवा
+        st.write("API Raw Response:", smoothiefroot_response.text)
 
-       except requests.exceptions.RequestException as e:
-            st.error(f"API request failed: {e}")
+        # JSON parse करा
+        data = smoothiefroot_response.json()
+        fv_df = pd.DataFrame(data)
+        st.dataframe(fv_df, use_container_width=True)
+
+    except requests.exceptions.RequestException as e:
+        st.error(f"API request failed: {e}")
+
 
         
         
