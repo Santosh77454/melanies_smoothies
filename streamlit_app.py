@@ -33,7 +33,7 @@ if ingredients_list:
     ingredients_string = ''
 
     for fruit_chosen in ingredients_list:
-    ingredients_string += fruit_chosen + ' '
+        ingredients_string += fruit_chosen + ' '
 
     # Snowflake dataframe मधून SEARCH_ON value
     search_on = pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
