@@ -43,7 +43,8 @@ if ingredients_list:
 
         # Call external API
         api_url = f"https://smoothiefroot.com/api/fruit/{search_on.lower()}"
-        st.write("API Raw Response:", smoothiefroot_response.text)
+        smoothiefroot_response = requests.get(api_url, headers=headers, timeout=7)
+
 
 
         try:
