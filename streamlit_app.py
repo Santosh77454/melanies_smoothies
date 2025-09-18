@@ -44,19 +44,21 @@ if ingredients_list:
         st.write("Generated URL:", api_url)
 
 
-
         try:
-            smoothiefroot_response = requests.get(api_url, timeout=7)
-            smoothiefroot_response.raise_for_status()  # Raise error if request fails
+            smoothiefroot_response = requests.get(api_url, headers=headers, timeout=7)
+            smoothiefroot_response.raise_for_status()  # Error throw करेल जर status 200 नसेल
 
-            # Convert JSON response to Pandas DataFrame
-            fv_df = pd.DataFrame(smoothiefroot_response.json())
+            st.write("API Raw Response:", smoothiefroot_response.text)
 
-            # Display in Streamlit
-            st.dataframe(data=fv_df, use_container_width=True)
+            data = smoothiefroot_response.json()
+            fv_df = pd.DataFrame(data)
+            st.dataframe(fv_df)
 
-        except requests.exceptions.RequestException as e:
+       except requests.exceptions.RequestException as e:
             st.error(f"API request failed: {e}")
+
+        
+        
 
     # Insert into Snowflake
     my_insert_stmt = f"""
