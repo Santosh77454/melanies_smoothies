@@ -40,10 +40,8 @@ if ingredients_list:
         
         # Show subheader for nutrition info
         st.subheader(f"{fruit_chosen} Nutrition Information")
-
-        # Call external API
         api_url = f"https://smoothiefroot.com/api/fruit/{search_on.lower()}"
-        smoothiefroot_response = requests.get(api_url, headers=headers, timeout=7)
+        st.write("Generated URL:", api_url)
 
 
 
