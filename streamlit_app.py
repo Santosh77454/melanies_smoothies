@@ -39,7 +39,7 @@ if ingredients_list:
         search_on = pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
 
         # URL तयार करा (lowercase)
-        api_url = f"https://smoothiefroot.com/api/fruit/{search_on.lower()}"
+        api_url = https://smoothiefroot.com/api/fruit/blueberry/{search_on.lower()}"
         st.write("Final API URL:", api_url)  # Debugging output
 
         headers = {
