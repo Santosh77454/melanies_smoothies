@@ -42,7 +42,7 @@ if ingredients_list:
         st.subheader(f"{fruit_chosen} Nutrition Information")
 
         # Call external API
-        api_url = f"https://smoothiefroot.com/api/fruit/{search_on}"
+        api_url = f"https://smoothiefroot.com/api/fruit/{search_on.lower()}"
         st.write("Fetching data from:", api_url)  # Debugging
 
         try:
