@@ -47,5 +47,5 @@ if ingredients_list:
     if time_to_insert:
         session.sql(my_insert_stmt).collect_nowait()
     
-        st.success('Your Smoothie is ordered,Betty Jean!', icon="✅")
+        st.success('Your Smoothie is ordered,!', icon="✅")
      
